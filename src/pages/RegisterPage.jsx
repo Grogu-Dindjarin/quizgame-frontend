@@ -29,7 +29,7 @@ const RegisterPage = () => {
 
     try {
       await api.post('/api/auth/register', { displayName, email, password });
-      navigate('/dashboard');
+      navigate('/login');
     } catch (err) {
       const message = err.response?.data?.message ?? 'Registration failed. Please try again.';
       setError(message);
