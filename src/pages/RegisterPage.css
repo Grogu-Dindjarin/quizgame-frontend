@@ -1,0 +1,63 @@
+.register-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-bg);
+  padding: 1rem;
+}
+
+.register-card {
+  width: 100%;
+  max-width: 420px;
+  background-color: var(--color-surface);
+  border-radius: 12px;
+  padding: 2rem 2rem 2.5rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+
+.register-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0 0 0.25rem;
+  letter-spacing: -0.5px;
+}
+
+.register-subtitle {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--color-muted, #888);
+  margin: 0 0 1.75rem;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.register-error {
+  font-size: 0.875rem;
+  color: var(--color-danger, #e53e3e);
+  text-align: center;
+  margin: 0;
+}
+
+.register-login-link {
+  text-align: center;
+  margin-top: 1.25rem;
+  font-size: 0.875rem;
+  color: var(--color-muted, #888);
+}
+
+.register-login-link a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.register-login-link a:hover {
+  text-decoration: underline;
+}
