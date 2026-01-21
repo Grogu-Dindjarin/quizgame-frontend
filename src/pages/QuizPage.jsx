@@ -31,11 +31,11 @@ const QuizPage = () => {
 
   const advance = useCallback(
     (overrideAnswerId) => {
+      if (!currentQuestion) return;
+
       const resolvedAnswerId =
         overrideAnswerId !== undefined ? overrideAnswerId : selectedAnswerId;
 
-      // BUG: no null guard — if user triggers advance before answers load,
-      // resolvedAnswerId can be null and gets pushed into the answers array
       const updatedAnswers = [
         ...answers,
         { questionId: currentQuestion.id, answerId: resolvedAnswerId },
