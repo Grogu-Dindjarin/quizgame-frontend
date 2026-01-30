@@ -63,7 +63,7 @@ const ProfilePage = () => {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
       setAvatarSrc(`${API_BASE}${data.avatarPath}`);
-      // BUG: updateAvatar not called here — AuthContext/dashboard still shows old avatar
+      updateAvatar(data.avatarPath);
       setMessage('Avatar succesvol bijgewerkt.');
     } catch {
       setError('Avatar uploaden mislukt. Probeer het opnieuw.');
