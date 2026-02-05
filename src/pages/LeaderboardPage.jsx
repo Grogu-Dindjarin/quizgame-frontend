@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import NavBar from '../components/NavBar';
 import LeaderboardRow from '../components/LeaderboardRow';
 import { useAuth } from '../context/AuthContext';
 import api from '../services/api';
@@ -74,6 +75,7 @@ const LeaderboardPage = () => {
           ))}
         </ul>
       )}
+      <NavBar />
     </div>
   );
 };
