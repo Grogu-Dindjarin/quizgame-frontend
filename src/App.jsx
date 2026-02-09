@@ -3,15 +3,14 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import AdminRoute from './components/AdminRoute';
 import PrivateRoute from './components/PrivateRoute';
 import { AuthProvider } from './context/AuthContext';
+import AdminPage from './pages/AdminPage';
+import DashboardPage from './pages/DashboardPage';
+import LeaderboardPage from './pages/LeaderboardPage';
 import LoginPage from './pages/LoginPage';
-
-const DashboardPage = () => <div>Dashboard</div>;
-const QuizPage = () => <div>Quiz</div>;
-const ResultsPage = () => <div>Results</div>;
-const LeaderboardPage = () => <div>Leaderboard</div>;
-const ProfilePage = () => <div>Profile</div>;
-const AdminPage = () => <div>Admin</div>;
-const NotFoundPage = () => <div>404</div>;
+import NotFoundPage from './pages/NotFoundPage';
+import ProfilePage from './pages/ProfilePage';
+import QuizPage from './pages/QuizPage';
+import ResultsPage from './pages/ResultsPage';
 
 const App = () => (
   <BrowserRouter>
