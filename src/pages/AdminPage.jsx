@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import Button from '../components/Button';
 import Input from '../components/Input';
@@ -19,20 +19,22 @@ const CategoriesTab = () => {
   const [editingId, setEditingId] = useState(null);
   const [editName, setEditName] = useState('');
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await api.get('/api/categories');
-        setCategories(response.data);
-      } catch {
-        setError('Categorieën konden niet worden geladen.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchCategories();
+  const fetchCategories = useCallback(async () => {
+    setLoading(true);
+    try {
+      const response = await api.get('/api/categories');
+      setCategories(response.data);
+      setError(null);
+    } catch {
+      setError('Categorieën konden niet worden geladen.');
+    } finally {
+      setLoading(false);
+    }
   }, []);
+
+  useEffect(() => {
+    fetchCategories();
+  }, [fetchCategories]);
 
   const handleCreate = async (e) => {
     e.preventDefault();
@@ -41,6 +43,7 @@ const CategoriesTab = () => {
     try {
       await api.post('/api/categories', { name: newName.trim() });
       setNewName('');
+      await fetchCategories();
     } catch {
       setError('Aanmaken mislukt.');
     } finally {
@@ -51,6 +54,7 @@ const CategoriesTab = () => {
   const handleDelete = async (id) => {
     try {
       await api.delete(`/api/categories/${id}`);
+      await fetchCategories();
     } catch {
       setError('Verwijderen mislukt.');
     }
