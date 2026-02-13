@@ -68,6 +68,7 @@ const QuizPage = () => {
       navigate('/results', { state: response.data });
     } catch {
       setError('Quiz kon niet worden opgeslagen. Probeer opnieuw.');
+    } finally {
       setSubmitting(false);
     }
   };
