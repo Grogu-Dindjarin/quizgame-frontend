@@ -86,7 +86,7 @@ const DashboardPage = () => {
     const fetchCategories = async () => {
       try {
         const response = await api.get('/api/categories');
-        setCategories(response.data);
+        setCategories(response.data ?? []);
       } catch {
         setError('Categorieën konden niet worden geladen.');
       } finally {
