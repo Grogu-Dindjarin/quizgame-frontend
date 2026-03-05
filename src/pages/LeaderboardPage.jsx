@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import NavBar from '../components/NavBar';
 import LeaderboardRow from '../components/LeaderboardRow';
 import { useAuth } from '../context/AuthContext';
 import api from '../services/api';
@@ -53,8 +54,10 @@ const LeaderboardPage = () => {
       )}
 
       {!loading && !error && entries.length === 0 && (
-        <div className="leaderboard-page__state">
+        <div className="leaderboard-page__state leaderboard-page__state--empty">
+          <p className="leaderboard-page__state-icon">🏆</p>
           <p className="leaderboard-page__state-text">Nog geen scores beschikbaar</p>
+          <p className="leaderboard-page__state-hint">Speel een quiz om als eerste op het leaderboard te komen!</p>
         </div>
       )}
 
@@ -74,6 +77,7 @@ const LeaderboardPage = () => {
           ))}
         </ul>
       )}
+      <NavBar />
     </div>
   );
 };
