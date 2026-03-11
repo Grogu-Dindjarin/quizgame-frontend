@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Avatar from '../components/Avatar';
@@ -30,22 +30,30 @@ const ProfilePage = () => {
 
   const fileInputRef = useRef(null);
 
-  const [initialized, setInitialized] = useState(false);
-  if (!initialized) {
-    setInitialized(true);
-    (async () => {
+  useEffect(() => {
+    let cancelled = false;
+
+    const loadProfile = async () => {
       try {
         const { data } = await api.get('/api/profile');
-        setDisplayName(data.displayName ?? '');
-        setPreferredDifficulty(data.preferredDifficulty ?? 'BEGINNER');
-        setAvatarSrc(data.avatarPath ? `${API_BASE}${data.avatarPath}` : null);
+        if (!cancelled) {
+          setDisplayName(data.displayName ?? '');
+          setPreferredDifficulty(data.preferredDifficulty ?? 'BEGINNER');
+          setAvatarSrc(data.avatarPath ? `${API_BASE}${data.avatarPath}` : null);
+        }
       } catch {
-        setError('Profiel kon niet worden geladen.');
+        if (!cancelled) setError('Profiel kon niet worden geladen.');
       } finally {
-        setLoading(false);
+        if (!cancelled) setLoading(false);
       }
-    })();
-  }
+    };
+
+    loadProfile();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const handleFileChange = async (e) => {
     const file = e.target.files?.[0];
@@ -62,7 +70,8 @@ const ProfilePage = () => {
       const { data } = await api.post('/api/profile/avatar', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
-      setAvatarSrc(`${API_BASE}${data.avatarPath}`);
+      const newSrc = `${API_BASE}${data.avatarPath}`;
+      setAvatarSrc(newSrc);
       updateAvatar(data.avatarPath);
       setMessage('Avatar succesvol bijgewerkt.');
     } catch {
