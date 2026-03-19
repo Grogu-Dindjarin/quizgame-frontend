@@ -45,14 +45,11 @@ const ResultsPage = () => {
           <section className="results-page__section">
             <h2 className="results-page__section-title">Behaalde badges</h2>
             <div className="results-page__badges">
-              {earnedBadges.map((badge) => (
-                <Badge
-                  key={badge.id}
-                  name={badge.name}
-                  description={badge.description}
-                  iconPath={badge.iconPath}
-                />
-              ))}
+              <Badge
+                name={earnedBadges[0].name}
+                description={earnedBadges[0].description}
+                iconPath={earnedBadges[0].iconPath}
+              />
             </div>
           </section>
         )}
