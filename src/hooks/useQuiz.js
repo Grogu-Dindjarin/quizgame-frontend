@@ -56,6 +56,7 @@ const useQuiz = ({ subcategoryId, gameMode, difficulty }) => {
       const isLast = currentIndex === questions.length - 1;
 
       if (isLast) {
+        clearInterval(timerRef.current);
         submitQuiz(updatedAnswers);
       } else {
         setAnswers(updatedAnswers);
