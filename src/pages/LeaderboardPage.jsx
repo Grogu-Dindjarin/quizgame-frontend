@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import NavBar from '../components/NavBar';
 import LeaderboardRow from '../components/LeaderboardRow';
 import { useAuth } from '../context/AuthContext';
 import api from '../services/api';
@@ -62,10 +63,10 @@ const LeaderboardPage = () => {
 
       {!loading && !error && entries.length > 0 && (
         <ul className="leaderboard-page__list">
-          {entries.map((entry) => (
+          {entries.map((entry, index) => (
             <li key={entry.userId}>
               <LeaderboardRow
-                rank={entry.rank}
+                rank={index + 1}
                 displayName={entry.displayName}
                 avatarPath={entry.avatarPath ? `${API_BASE}${entry.avatarPath}` : null}
                 totalScore={entry.totalScore}
@@ -76,6 +77,7 @@ const LeaderboardPage = () => {
           ))}
         </ul>
       )}
+      <NavBar />
     </div>
   );
 };
