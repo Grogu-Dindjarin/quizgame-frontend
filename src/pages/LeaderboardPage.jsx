@@ -63,10 +63,10 @@ const LeaderboardPage = () => {
 
       {!loading && !error && entries.length > 0 && (
         <ul className="leaderboard-page__list">
-          {entries.map((entry, index) => (
+          {entries.map((entry) => (
             <li key={entry.userId}>
               <LeaderboardRow
-                rank={index + 1}
+                rank={entry.rank}
                 displayName={entry.displayName}
                 avatarPath={entry.avatarPath ? `${API_BASE}${entry.avatarPath}` : null}
                 totalScore={entry.totalScore}
