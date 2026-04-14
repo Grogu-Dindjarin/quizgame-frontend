@@ -31,7 +31,8 @@ const RegisterPage = () => {
       await api.post('/api/auth/register', { displayName, email, password });
       navigate('/login');
     } catch (err) {
-      const message = err.response?.data?.message ?? 'Registration failed. Please try again.';
+      const message =
+        err.response?.data?.message ?? 'Registration failed. Please try again.';
       setError(message);
     } finally {
       setLoading(false);
@@ -92,8 +93,7 @@ const RegisterPage = () => {
         </form>
 
         <p className="register-login-link">
-          Already have an account?{' '}
-          <a href="/login">Sign in</a>
+          Already have an account? <a href="/login">Sign in</a>
         </p>
       </div>
     </div>

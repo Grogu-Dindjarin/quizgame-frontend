@@ -64,7 +64,10 @@ const QuizPage = () => {
     <div className="quiz-page">
       <header className="quiz-page__header">
         <div className="quiz-page__progress-bar">
-          <div className="quiz-page__progress-fill" style={{ width: `${progressPercent}%` }} />
+          <div
+            className="quiz-page__progress-fill"
+            style={{ width: `${progressPercent}%` }}
+          />
         </div>
       </header>
 
@@ -105,7 +108,9 @@ const QuizPage = () => {
             onClick={() => advance()}
             disabled={submitting}
           >
-            {currentIndex === questions.length - 1 ? 'Resultaat bekijken' : 'Volgende'}
+            {currentIndex === questions.length - 1
+              ? 'Resultaat bekijken'
+              : 'Volgende'}
           </button>
         )}
       </main>

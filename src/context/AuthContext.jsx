@@ -6,8 +6,12 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(() => localStorage.getItem('token'));
   const [role, setRole] = useState(() => localStorage.getItem('role'));
   const [userId, setUserId] = useState(() => localStorage.getItem('userId'));
-  const [displayName, setDisplayName] = useState(() => localStorage.getItem('displayName'));
-  const [avatarPath, setAvatarPath] = useState(() => localStorage.getItem('avatarPath'));
+  const [displayName, setDisplayName] = useState(() =>
+    localStorage.getItem('displayName'),
+  );
+  const [avatarPath, setAvatarPath] = useState(() =>
+    localStorage.getItem('avatarPath'),
+  );
 
   const login = (newToken, newRole, newUserId, newDisplayName) => {
     localStorage.setItem('token', newToken);
@@ -39,7 +43,18 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ token, role, userId, displayName, avatarPath, login, logout, updateAvatar }}>
+    <AuthContext.Provider
+      value={{
+        token,
+        role,
+        userId,
+        displayName,
+        avatarPath,
+        login,
+        logout,
+        updateAvatar,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

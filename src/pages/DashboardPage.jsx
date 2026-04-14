@@ -14,12 +14,18 @@ const MODES = [
 const DIFFICULTIES = ['BEGINNER', 'INTERMEDIATE', 'EXPERT'];
 
 const DifficultyBadge = ({ difficulty }) => (
-  <span className={`difficulty-badge difficulty-badge--${difficulty.toLowerCase()}`}>
+  <span
+    className={`difficulty-badge difficulty-badge--${difficulty.toLowerCase()}`}
+  >
     {difficulty.charAt(0) + difficulty.slice(1).toLowerCase()}
   </span>
 );
 
-const CategoryAccordion = ({ categories, selectedSubcategoryId, onSelectSubcategory }) => {
+const CategoryAccordion = ({
+  categories,
+  selectedSubcategoryId,
+  onSelectSubcategory,
+}) => {
   const [openCategoryId, setOpenCategoryId] = useState(null);
 
   const toggleCategory = (id) => {
@@ -121,7 +127,9 @@ const DashboardPage = () => {
               {displayName ? displayName.charAt(0).toUpperCase() : '?'}
             </div>
           )}
-          <span className="dashboard__display-name">{displayName || 'Speler'}</span>
+          <span className="dashboard__display-name">
+            {displayName || 'Speler'}
+          </span>
         </div>
         <button type="button" className="dashboard__logout" onClick={logout}>
           Uitloggen
@@ -165,7 +173,11 @@ const DashboardPage = () => {
           <section className="dashboard__section">
             <h2 className="dashboard__section-title">Kies een onderwerp</h2>
             {loading && <p className="dashboard__status">Laden...</p>}
-            {error && <p className="dashboard__status dashboard__status--error">{error}</p>}
+            {error && (
+              <p className="dashboard__status dashboard__status--error">
+                {error}
+              </p>
+            )}
             {!loading && !error && categories.length === 0 && (
               <p className="dashboard__status">Geen categorieën beschikbaar</p>
             )}

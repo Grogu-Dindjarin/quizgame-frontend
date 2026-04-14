@@ -1,6 +1,15 @@
 import './Input.css';
 
-const Input = ({ id, label, type = 'text', value, onChange, error, placeholder, required = false }) => (
+const Input = ({
+  id,
+  label,
+  type = 'text',
+  value,
+  onChange,
+  error,
+  placeholder,
+  required = false,
+}) => (
   <div className={`input-group${error ? ' input-group--error' : ''}`}>
     {label && (
       <label htmlFor={id} className="input-label">

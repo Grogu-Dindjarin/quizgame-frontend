@@ -126,7 +126,9 @@ const QuestionManagement = () => {
               />
             </div>
           ))}
-          <p className="admin-answers__hint">Selecteer het correcte antwoord via de radioknop.</p>
+          <p className="admin-answers__hint">
+            Selecteer het correcte antwoord via de radioknop.
+          </p>
         </div>
 
         <Button type="submit" disabled={submitting}>
@@ -143,7 +145,9 @@ const QuestionManagement = () => {
             <li key={question.id} className="admin-list__item">
               <span className="admin-list__name">{question.text}</span>
               <div className="admin-list__actions">
-                <Button onClick={() => handleDelete(question.id)}>Verwijderen</Button>
+                <Button onClick={() => handleDelete(question.id)}>
+                  Verwijderen
+                </Button>
               </div>
             </li>
           ))}

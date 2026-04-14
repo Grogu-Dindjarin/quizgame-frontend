@@ -31,9 +31,9 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 
 ## Environment variables
 
-| Variable       | Default                  | Description                  |
-| -------------- | ------------------------ | ---------------------------- |
-| `VITE_API_URL` | `http://localhost:8080`  | Base URL of the backend API  |
+| Variable       | Default                 | Description                 |
+| -------------- | ----------------------- | --------------------------- |
+| `VITE_API_URL` | `http://localhost:8080` | Base URL of the backend API |
 
 Create a `.env` file in the project root:
 
@@ -43,14 +43,14 @@ VITE_API_URL=http://localhost:8080
 
 ## Available commands
 
-| Command              | Description                              |
-| -------------------- | ---------------------------------------- |
-| `bun run dev`        | Start development server with hot reload |
-| `bun run build`      | Build for production                     |
-| `bun run preview`    | Preview the production build locally     |
-| `bun run lint`       | Run ESLint                               |
-| `bun run format`     | Format code with Prettier                |
-| `bun run quality`    | Format and lint in one command           |
+| Command           | Description                              |
+| ----------------- | ---------------------------------------- |
+| `bun run dev`     | Start development server with hot reload |
+| `bun run build`   | Build for production                     |
+| `bun run preview` | Preview the production build locally     |
+| `bun run lint`    | Run ESLint                               |
+| `bun run format`  | Format code with Prettier                |
+| `bun run quality` | Format and lint in one command           |
 
 ## Project structure
 
@@ -66,7 +66,7 @@ src/
 
 ## Default accounts (seeded)
 
-| Email               | Password   | Role  |
-| ------------------- | ---------- | ----- |
-| admin@quizzle.nl    | admin123   | ADMIN |
-| user@quizzle.nl     | user123    | USER  |
+| Email            | Password | Role  |
+| ---------------- | -------- | ----- |
+| admin@quizzle.nl | admin123 | ADMIN |
+| user@quizzle.nl  | user123  | USER  |

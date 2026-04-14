@@ -15,7 +15,11 @@ const Avatar = ({ src, displayName, size = 64 }) => {
   }
 
   return (
-    <div className="avatar avatar--placeholder" style={style} aria-label={`Avatar van ${displayName}`}>
+    <div
+      className="avatar avatar--placeholder"
+      style={style}
+      aria-label={`Avatar van ${displayName}`}
+    >
       {displayName?.charAt(0).toUpperCase()}
     </div>
   );

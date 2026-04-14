@@ -1,6 +1,13 @@
 import './AnswerOption.css';
 
-const AnswerOption = ({ text, label, selected, correct, revealed, onClick }) => {
+const AnswerOption = ({
+  text,
+  label,
+  selected,
+  correct,
+  revealed,
+  onClick,
+}) => {
   const getModifier = () => {
     if (!revealed) return selected ? 'selected' : '';
     if (correct) return 'correct';

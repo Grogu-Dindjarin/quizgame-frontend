@@ -66,7 +66,14 @@ const useQuiz = ({ subcategoryId, gameMode, difficulty }) => {
         setTimeLeft(TIMER_SECONDS);
       }
     },
-    [selectedAnswerId, answers, currentQuestion, currentIndex, questions.length, submitQuiz],
+    [
+      selectedAnswerId,
+      answers,
+      currentQuestion,
+      currentIndex,
+      questions.length,
+      submitQuiz,
+    ],
   );
 
   const selectAnswer = useCallback(

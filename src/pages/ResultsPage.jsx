@@ -13,9 +13,14 @@ const ResultsPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { score = 0, totalQuestions = 0, earnedBadges = [] } = location.state || {};
+  const {
+    score = 0,
+    totalQuestions = 0,
+    earnedBadges = [],
+  } = location.state || {};
 
-  const percentage = totalQuestions > 0 ? Math.round((score / totalQuestions) * 100) : 0;
+  const percentage =
+    totalQuestions > 0 ? Math.round((score / totalQuestions) * 100) : 0;
   const rating = getRating(percentage);
 
   return (

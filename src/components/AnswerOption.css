@@ -10,7 +10,9 @@
   font-size: 0.95rem;
   text-align: left;
   cursor: pointer;
-  transition: border-color 0.15s, background-color 0.15s;
+  transition:
+    border-color 0.15s,
+    background-color 0.15s;
 }
 
 .answer-option:not(:disabled):hover {

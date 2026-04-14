@@ -9,7 +9,11 @@ import api from '../services/api';
 import './ProfilePage.css';
 
 const DIFFICULTIES = ['BEGINNER', 'INTERMEDIATE', 'EXPERT'];
-const DIFFICULTY_LABELS = { BEGINNER: 'Beginner', INTERMEDIATE: 'Gemiddeld', EXPERT: 'Expert' };
+const DIFFICULTY_LABELS = {
+  BEGINNER: 'Beginner',
+  INTERMEDIATE: 'Gemiddeld',
+  EXPERT: 'Expert',
+};
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8080';
 
@@ -39,7 +43,9 @@ const ProfilePage = () => {
         if (!cancelled) {
           setDisplayName(data.displayName ?? '');
           setPreferredDifficulty(data.preferredDifficulty ?? 'BEGINNER');
-          setAvatarSrc(data.avatarPath ? `${API_BASE}${data.avatarPath}` : null);
+          setAvatarSrc(
+            data.avatarPath ? `${API_BASE}${data.avatarPath}` : null,
+          );
         }
       } catch {
         if (!cancelled) setError('Profiel kon niet worden geladen.');
@@ -109,7 +115,11 @@ const ProfilePage = () => {
   return (
     <div className="profile-page">
       <header className="profile-page__header">
-        <button className="profile-page__back" type="button" onClick={() => navigate(-1)}>
+        <button
+          className="profile-page__back"
+          type="button"
+          onClick={() => navigate(-1)}
+        >
           ← Terug
         </button>
         <h1 className="profile-page__title">Mijn profiel</h1>
@@ -134,8 +144,16 @@ const ProfilePage = () => {
         />
       </section>
 
-      {message && <p className="profile-page__message profile-page__message--success">{message}</p>}
-      {error && <p className="profile-page__message profile-page__message--error">{error}</p>}
+      {message && (
+        <p className="profile-page__message profile-page__message--success">
+          {message}
+        </p>
+      )}
+      {error && (
+        <p className="profile-page__message profile-page__message--error">
+          {error}
+        </p>
+      )}
 
       <form className="profile-page__form" onSubmit={handleProfileSubmit}>
         <Input

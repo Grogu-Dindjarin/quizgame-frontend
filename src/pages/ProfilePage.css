@@ -60,7 +60,9 @@
   cursor: pointer;
   padding: 0.4rem 1rem;
   border-radius: var(--radius);
-  transition: border-color 0.2s, background-color 0.2s;
+  transition:
+    border-color 0.2s,
+    background-color 0.2s;
 }
 
 .profile-page__avatar-btn:hover:not(:disabled) {
@@ -142,7 +144,10 @@
   font-size: 0.8rem;
   font-weight: 600;
   cursor: pointer;
-  transition: border-color 0.2s, color 0.2s, background-color 0.2s;
+  transition:
+    border-color 0.2s,
+    color 0.2s,
+    background-color 0.2s;
 }
 
 .profile-page__difficulty-btn:hover {

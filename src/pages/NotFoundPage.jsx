@@ -10,7 +10,9 @@ const NotFoundPage = () => {
     <div className="not-found-page">
       <p className="not-found-page__code">404</p>
       <p className="not-found-page__subtitle">Pagina niet gevonden</p>
-      <Button onClick={() => navigate('/dashboard')}>Terug naar dashboard</Button>
+      <Button onClick={() => navigate('/dashboard')}>
+        Terug naar dashboard
+      </Button>
     </div>
   );
 };

@@ -11,7 +11,11 @@
 
 .leaderboard-row--current {
   border-color: var(--color-primary);
-  background: color-mix(in srgb, var(--color-primary) 10%, var(--color-surface));
+  background: color-mix(
+    in srgb,
+    var(--color-primary) 10%,
+    var(--color-surface)
+  );
 }
 
 .leaderboard-row__rank {

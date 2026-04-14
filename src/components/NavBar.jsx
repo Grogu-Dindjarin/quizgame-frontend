@@ -10,7 +10,9 @@ const NavBar = () => {
     <nav className="navbar">
       <NavLink
         to="/leaderboard"
-        className={({ isActive }) => `navbar__link${isActive ? ' navbar__link--active' : ''}`}
+        className={({ isActive }) =>
+          `navbar__link${isActive ? ' navbar__link--active' : ''}`
+        }
       >
         <span className="navbar__icon">🏆</span>
         <span className="navbar__label">Leaderboard</span>
@@ -18,7 +20,9 @@ const NavBar = () => {
 
       <NavLink
         to="/profile"
-        className={({ isActive }) => `navbar__link${isActive ? ' navbar__link--active' : ''}`}
+        className={({ isActive }) =>
+          `navbar__link${isActive ? ' navbar__link--active' : ''}`
+        }
       >
         <span className="navbar__icon">👤</span>
         <span className="navbar__label">Profiel</span>
@@ -27,7 +31,9 @@ const NavBar = () => {
       {role === 'ADMIN' && (
         <NavLink
           to="/admin"
-          className={({ isActive }) => `navbar__link${isActive ? ' navbar__link--active' : ''}`}
+          className={({ isActive }) =>
+            `navbar__link${isActive ? ' navbar__link--active' : ''}`
+          }
         >
           <span className="navbar__icon">⚙️</span>
           <span className="navbar__label">Admin</span>

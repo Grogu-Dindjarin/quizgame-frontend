@@ -62,7 +62,9 @@ const CategoryManagement = () => {
     try {
       await api.put(`/api/categories/${editingId}`, { name: editName.trim() });
       setCategories((prev) =>
-        prev.map((c) => (c.id === editingId ? { ...c, name: editName.trim() } : c)),
+        prev.map((c) =>
+          c.id === editingId ? { ...c, name: editName.trim() } : c,
+        ),
       );
       setEditingId(null);
       setEditName('');
@@ -102,7 +104,9 @@ const CategoryManagement = () => {
               <span className="admin-list__name">{category.name}</span>
               <div className="admin-list__actions">
                 <Button onClick={() => startEdit(category)}>Bewerken</Button>
-                <Button onClick={() => handleDelete(category.id)}>Verwijderen</Button>
+                <Button onClick={() => handleDelete(category.id)}>
+                  Verwijderen
+                </Button>
               </div>
               {editingId === category.id && (
                 <form className="admin-inline-form" onSubmit={handleEditSubmit}>

@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import NavBar from '../components/NavBar';
 import LeaderboardRow from '../components/LeaderboardRow';
 import { useAuth } from '../context/AuthContext';
 import api from '../services/api';
@@ -23,7 +22,9 @@ const LeaderboardPage = () => {
         const response = await api.get('/api/leaderboard');
         setEntries(response.data);
       } catch {
-        setError('Leaderboard kon niet worden geladen. Probeer het later opnieuw.');
+        setError(
+          'Leaderboard kon niet worden geladen. Probeer het later opnieuw.',
+        );
       } finally {
         setLoading(false);
       }
@@ -35,7 +36,11 @@ const LeaderboardPage = () => {
   return (
     <div className="leaderboard-page">
       <div className="leaderboard-page__header">
-        <button className="leaderboard-page__back" type="button" onClick={() => navigate(-1)}>
+        <button
+          className="leaderboard-page__back"
+          type="button"
+          onClick={() => navigate(-1)}
+        >
           ← Terug
         </button>
         <h1 className="leaderboard-page__title">Leaderboard</h1>
@@ -56,8 +61,12 @@ const LeaderboardPage = () => {
       {!loading && !error && entries.length === 0 && (
         <div className="leaderboard-page__state leaderboard-page__state--empty">
           <p className="leaderboard-page__state-icon">🏆</p>
-          <p className="leaderboard-page__state-text">Nog geen scores beschikbaar</p>
-          <p className="leaderboard-page__state-hint">Speel een quiz om als eerste op het leaderboard te komen!</p>
+          <p className="leaderboard-page__state-text">
+            Nog geen scores beschikbaar
+          </p>
+          <p className="leaderboard-page__state-hint">
+            Speel een quiz om als eerste op het leaderboard te komen!
+          </p>
         </div>
       )}
 
@@ -68,7 +77,9 @@ const LeaderboardPage = () => {
               <LeaderboardRow
                 rank={entry.rank}
                 displayName={entry.displayName}
-                avatarPath={entry.avatarPath ? `${API_BASE}${entry.avatarPath}` : null}
+                avatarPath={
+                  entry.avatarPath ? `${API_BASE}${entry.avatarPath}` : null
+                }
                 totalScore={entry.totalScore}
                 quizCount={entry.quizCount}
                 isCurrentUser={entry.userId === userId}
@@ -77,7 +88,6 @@ const LeaderboardPage = () => {
           ))}
         </ul>
       )}
-      <NavBar />
     </div>
   );
 };
