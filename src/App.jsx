@@ -1,6 +1,13 @@
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import {
+  BrowserRouter,
+  Navigate,
+  Route,
+  Routes,
+  useLocation,
+} from 'react-router-dom';
 
 import AdminRoute from './components/AdminRoute';
+import NavBar from './components/NavBar';
 import PrivateRoute from './components/PrivateRoute';
 import { AuthProvider } from './context/AuthContext';
 import AdminPage from './pages/AdminPage';
@@ -12,9 +19,14 @@ import ProfilePage from './pages/ProfilePage';
 import QuizPage from './pages/QuizPage';
 import ResultsPage from './pages/ResultsPage';
 
-const App = () => (
-  <BrowserRouter>
-    <AuthProvider>
+const NAV_PATHS = ['/dashboard', '/leaderboard', '/profile', '/admin'];
+
+const AppContent = () => {
+  const { pathname } = useLocation();
+  const showNav = NAV_PATHS.some((p) => pathname.startsWith(p));
+
+  return (
+    <>
       <Routes>
         <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/login" element={<LoginPage />} />
@@ -68,6 +80,15 @@ const App = () => (
         />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
+      {showNav && <NavBar />}
+    </>
+  );
+};
+
+const App = () => (
+  <BrowserRouter>
+    <AuthProvider>
+      <AppContent />
     </AuthProvider>
   </BrowserRouter>
 );

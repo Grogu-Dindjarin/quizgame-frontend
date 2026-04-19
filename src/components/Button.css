@@ -54,3 +54,16 @@
 .btn--danger:hover:not(:disabled) {
   opacity: 0.88;
 }
+
+.btn--white {
+  background-color: #fff;
+  color: #0b0b15;
+  font-size: 1rem;
+  font-weight: 800;
+  padding: 1rem;
+  border-radius: 9999px;
+}
+
+.btn--white:hover:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.92);
+}

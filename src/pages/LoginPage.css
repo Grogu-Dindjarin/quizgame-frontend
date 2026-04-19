@@ -1,110 +1,133 @@
 .login-page {
-  min-height: 100vh;
+  position: relative;
+  min-height: 100dvh;
+  overflow: hidden;
+  background: var(--color-bg);
+}
+
+.login-page::before {
+  content: '';
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(124, 58, 237, 0.38) 0%,
+    rgba(219, 39, 119, 0.08) 50%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.login-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 130%;
+  min-height: 130%;
+  width: auto;
+  height: auto;
+  object-fit: cover;
+  opacity: 0.3;
+  z-index: 0;
+}
+
+.login-layout {
+  position: relative;
+  z-index: 1;
   display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  padding: 70px 26px 40px;
+}
+
+.login-brand {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: 36px;
+  text-align: center;
+}
+
+.login-icon {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--color-bg);
-  padding: 1rem;
+}
+
+.login-brand h1 {
+  font-size: 2.4rem;
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-top: 16px;
+}
+
+.login-brand p {
+  font-size: 0.94rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+  margin-top: 10px;
+  line-height: 1.6;
+  max-width: 280px;
 }
 
 .login-card {
-  width: 100%;
-  max-width: 420px;
-  background-color: var(--color-surface);
-  border-radius: 12px;
-  padding: 2rem 2rem 2.5rem;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
-}
-
-.login-title {
-  text-align: center;
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--color-primary);
-  margin: 0 0 1.5rem;
-  letter-spacing: -0.5px;
-}
-
-.login-tabs {
+  background: rgba(20, 20, 42, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 24px;
+  padding: 26px 22px;
   display: flex;
-  border-radius: 8px;
-  overflow: hidden;
-  border: 1px solid var(--color-border, #333);
-  margin-bottom: 1.75rem;
+  flex-direction: column;
+  gap: 16px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
-.login-tab {
+.login-toggle {
+  display: flex;
+  background: rgba(15, 15, 32, 0.8);
+  border-radius: 9999px;
+  padding: 4px;
+  gap: 4px;
+}
+
+.login-toggle-btn {
   flex: 1;
-  padding: 0.6rem;
-  background: none;
+  padding: 9px;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--color-text-muted);
+  transition: all 0.2s ease;
   border: none;
-  color: var(--color-muted, #888);
-  font-size: 0.9rem;
-  font-weight: 500;
+  background: none;
   cursor: pointer;
-  transition:
-    background-color 0.15s ease,
-    color 0.15s ease;
+  font-family: inherit;
 }
 
-.login-tab--active {
-  background-color: var(--color-primary);
+.login-toggle-btn--active {
+  background: var(--color-primary);
   color: #fff;
+  box-shadow: 0 3px 12px rgba(124, 58, 237, 0.45);
 }
 
 .login-form {
   display: flex;
   flex-direction: column;
-  gap: 1.1rem;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-}
-
-.form-group label {
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--color-text);
-}
-
-.form-group input {
-  padding: 0.6rem 0.875rem;
-  background-color: var(--color-bg);
-  border: 1px solid var(--color-border, #333);
-  border-radius: 6px;
-  color: var(--color-text);
-  font-size: 0.95rem;
-  outline: none;
-  transition: border-color 0.15s ease;
-}
-
-.form-group input:focus {
-  border-color: var(--color-primary);
-}
-
-.login-submit {
-  margin-top: 0.5rem;
-  padding: 0.7rem;
-  background-color: var(--color-primary);
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: opacity 0.15s ease;
-}
-
-.login-submit:hover {
-  opacity: 0.88;
+  gap: 12px;
 }
 
 .login-error {
   font-size: 0.875rem;
-  color: var(--color-danger, #e53e3e);
+  color: var(--color-danger);
   text-align: center;
   margin: 0;
 }

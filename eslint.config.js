@@ -3,6 +3,7 @@ import prettier from 'eslint-plugin-prettier/recommended';
 import react from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
+import globals from 'globals';
 
 export default [
   js.configs.recommended,
@@ -10,6 +11,9 @@ export default [
   react.configs.flat['jsx-runtime'],
   prettier,
   {
+    languageOptions: {
+      globals: { ...globals.browser, ...globals.node },
+    },
     plugins: {
       'react-hooks': reactHooks,
       'simple-import-sort': simpleImportSort,
