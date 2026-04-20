@@ -7,6 +7,42 @@
   position: relative;
 }
 
+.dashboard::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  right: -80px;
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(124, 58, 237, 0.38) 0%,
+    rgba(147, 51, 234, 0.12) 45%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.dashboard::after {
+  content: '';
+  position: absolute;
+  bottom: -80px;
+  left: -60px;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(245, 158, 11, 0.22) 0%,
+    rgba(124, 58, 237, 0.1) 50%,
+    transparent 72%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
 /* ── Header ── */
 .dashboard__header {
   position: relative;
@@ -161,6 +197,8 @@
   cursor: pointer;
   transition: all 0.2s ease;
   font-family: inherit;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .mode-card:hover {
@@ -247,6 +285,8 @@
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   overflow: hidden;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .cat-hd {

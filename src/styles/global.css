@@ -1,9 +1,9 @@
 :root {
   /* Design tokens */
   --bg: #0b0b15;
-  --surface: #14142a;
-  --surface-hi: #1c1c36;
-  --surface-lo: #0f0f20;
+  --surface: rgba(20, 20, 42, 0.55);
+  --surface-hi: rgba(28, 28, 54, 0.7);
+  --surface-lo: rgba(15, 15, 32, 0.7);
   --border: rgba(255, 255, 255, 0.07);
   --border-hi: rgba(255, 255, 255, 0.14);
   --accent: #7c3aed;

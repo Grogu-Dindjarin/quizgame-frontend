@@ -111,6 +111,8 @@
   align-items: center;
   gap: 4px;
   text-align: center;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .res-stat-v {
@@ -157,6 +159,8 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 /* ── Action buttons ── */
