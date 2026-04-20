@@ -16,6 +16,7 @@ const AnswerOption = ({
   };
 
   const modifier = getModifier();
+  const labelClass = `answer-option__label answer-option__label--${label.toLowerCase()}`;
 
   return (
     <button
@@ -24,7 +25,7 @@ const AnswerOption = ({
       onClick={onClick}
       disabled={revealed}
     >
-      <span className="answer-option__label">{label}</span>
+      <span className={labelClass}>{label}</span>
       <span className="answer-option__text">{text}</span>
     </button>
   );

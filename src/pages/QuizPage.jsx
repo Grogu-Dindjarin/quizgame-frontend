@@ -1,11 +1,29 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import AnswerOption from '../components/AnswerOption';
-import QuizCard from '../components/QuizCard';
 import useQuiz from '../hooks/useQuiz';
 import './QuizPage.css';
 
 const ANSWER_LABELS = ['A', 'B', 'C', 'D'];
+
+const HourglassIcon = () => (
+  <svg
+    width="26"
+    height="26"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.7"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <line x1="5" y1="3" x2="19" y2="3" />
+    <line x1="5" y1="21" x2="19" y2="21" />
+    <path d="M5 3L19 3L12 12L19 21L5 21L12 12L5 3" />
+    <path d="M8.5 6.5H15.5" />
+    <path d="M9.5 17H14.5" />
+  </svg>
+);
 
 const QuizPage = () => {
   const location = useLocation();
@@ -62,58 +80,79 @@ const QuizPage = () => {
 
   return (
     <div className="quiz-page">
-      <header className="quiz-page__header">
-        <div className="quiz-page__progress-bar">
+      <div className="quiz-topbar">
+        <div className="quiz-prog-track">
           <div
-            className="quiz-page__progress-fill"
+            className="quiz-prog-fill"
             style={{ width: `${progressPercent}%` }}
           />
         </div>
-      </header>
+      </div>
 
-      <main className="quiz-page__main">
-        <QuizCard
-          questionText={currentQuestion.text}
-          questionNumber={currentIndex + 1}
-          totalQuestions={questions.length}
-        />
+      <div className="quiz-hd">
+        <button
+          type="button"
+          className="quiz-back"
+          onClick={() => navigate('/dashboard')}
+        >
+          ←
+        </button>
+        <span className="quiz-title">
+          {currentQuestion.subcategoryName ?? 'Quiz'}
+        </span>
+        <span className="quiz-chip">
+          {currentIndex + 1} / {questions.length}
+        </span>
+      </div>
 
-        <div className="quiz-page__timer">
-          <span
-            className={`quiz-page__timer-value${timeLeft <= 3 ? ' quiz-page__timer-value--urgent' : ''}`}
-          >
-            {timeLeft}
-          </span>
-          <span className="quiz-page__timer-label">seconden</span>
+      <div className="quiz-scroll">
+        <div className="quiz-content">
+          <div className="quiz-cdown-card">
+            <div>
+              <div className="quiz-cdown-label">Resterende tijd</div>
+              <div
+                className={`quiz-cdown-num${timeLeft <= 3 ? ' quiz-cdown-num--urgent' : ''}`}
+              >
+                {timeLeft}
+              </div>
+            </div>
+            <div className="quiz-cdown-right">
+              <HourglassIcon />
+            </div>
+          </div>
+
+          <div className="quiz-q-card">
+            <p className="quiz-q-text">{currentQuestion.text}</p>
+          </div>
+
+          <div className="quiz-ans-list">
+            {currentQuestion.answers.map((answer, i) => (
+              <AnswerOption
+                key={answer.id}
+                label={ANSWER_LABELS[i]}
+                text={answer.text}
+                selected={selectedAnswerId === answer.id}
+                correct={answer.correct}
+                revealed={revealed}
+                onClick={() => selectAnswer(answer.id)}
+              />
+            ))}
+          </div>
+
+          {revealed && (
+            <button
+              type="button"
+              className="quiz-next-btn"
+              onClick={() => advance()}
+              disabled={submitting}
+            >
+              {currentIndex === questions.length - 1
+                ? 'Resultaat bekijken'
+                : 'Volgende vraag →'}
+            </button>
+          )}
         </div>
-
-        <div className="quiz-page__answers">
-          {currentQuestion.answers.map((answer, i) => (
-            <AnswerOption
-              key={answer.id}
-              label={ANSWER_LABELS[i]}
-              text={answer.text}
-              selected={selectedAnswerId === answer.id}
-              correct={answer.correct}
-              revealed={revealed}
-              onClick={() => selectAnswer(answer.id)}
-            />
-          ))}
-        </div>
-
-        {revealed && (
-          <button
-            type="button"
-            className="quiz-page__next-btn"
-            onClick={() => advance()}
-            disabled={submitting}
-          >
-            {currentIndex === questions.length - 1
-              ? 'Resultaat bekijken'
-              : 'Volgende'}
-          </button>
-        )}
-      </main>
+      </div>
     </div>
   );
 };

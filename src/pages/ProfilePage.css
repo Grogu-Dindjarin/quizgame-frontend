@@ -1,8 +1,10 @@
 .profile-page {
-  min-height: 100dvh;
-  background: var(--color-bg);
-  padding-bottom: 82px;
+  height: 100dvh;
+  background: var(--bg);
   position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .profile-page::before {
@@ -42,8 +44,11 @@
 }
 
 .profile__scroll {
+  flex: 1;
   overflow-y: auto;
+  overflow-x: hidden;
   scrollbar-width: none;
+  padding-bottom: 82px;
 }
 
 .profile__scroll::-webkit-scrollbar {

@@ -3,11 +3,32 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Badge from '../components/Badge';
 import './ResultsPage.css';
 
-const getRating = (percentage) => {
-  if (percentage >= 90) return '⭐⭐⭐';
-  if (percentage >= 60) return '⭐⭐';
-  return '⭐';
+const getLabel = (pct) => {
+  if (pct >= 90) return 'Uitstekend!';
+  if (pct >= 60) return 'Goed gedaan!';
+  return 'Blijf oefenen!';
 };
+
+const ExplosionIcon = () => (
+  <svg
+    width="56"
+    height="56"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="url(#res-grad)"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <defs>
+      <linearGradient id="res-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#f9a8d4" />
+        <stop offset="100%" stopColor="#7c3aed" />
+      </linearGradient>
+    </defs>
+    <path d="M12 2L14.5 7.5L20.5 5L17.5 10.5L22 13.5L17 15L19.5 20.5L14 17.5L12 22L10 17.5L4.5 20.5L7 15L2 13.5L6.5 10.5L3.5 5L9.5 7.5Z" />
+  </svg>
+);
 
 const ResultsPage = () => {
   const location = useLocation();
@@ -21,35 +42,40 @@ const ResultsPage = () => {
 
   const percentage =
     totalQuestions > 0 ? Math.round((score / totalQuestions) * 100) : 0;
-  const rating = getRating(percentage);
 
   return (
     <div className="results-page">
-      <header className="results-page__header">
-        <h1 className="results-page__title">Resultaat</h1>
-        <p className="results-page__rating">{rating}</p>
-      </header>
+      <div className="results-scroll">
+        <div className="res-hero">
+          <ExplosionIcon />
+          <div className="res-big">
+            {score} / {totalQuestions}
+          </div>
+          <div className="res-label">{getLabel(percentage)}</div>
+          <div className="res-sub">{percentage}% gescoord</div>
+        </div>
 
-      <main className="results-page__main">
-        <div className="results-page__stats">
-          <div className="stat-card">
-            <span className="stat-card__value">{score}</span>
-            <span className="stat-card__label">Goed</span>
+        <div className="res-stats">
+          <div className="res-stat-tile">
+            <div className="res-stat-v res-stat-v--accent">{percentage}%</div>
+            <div className="res-stat-l">Score</div>
           </div>
-          <div className="stat-card">
-            <span className="stat-card__value">{totalQuestions}</span>
-            <span className="stat-card__label">Totaal</span>
+          <div className="res-stat-tile">
+            <div className="res-stat-v">
+              {score}/{totalQuestions}
+            </div>
+            <div className="res-stat-l">Correct</div>
           </div>
-          <div className="stat-card stat-card--highlight">
-            <span className="stat-card__value">{percentage}%</span>
-            <span className="stat-card__label">Score</span>
+          <div className="res-stat-tile">
+            <div className="res-stat-v res-stat-v--warn">+{score * 100}</div>
+            <div className="res-stat-l">Punten</div>
           </div>
         </div>
 
         {earnedBadges.length > 0 && (
-          <section className="results-page__section">
-            <h2 className="results-page__section-title">Behaalde badges</h2>
-            <div className="results-page__badges">
+          <div className="res-sec">
+            <div className="res-sec-label">Verdiende badges</div>
+            <div className="res-badge-card">
               {earnedBadges.map((badge) => (
                 <Badge
                   key={badge.id}
@@ -59,40 +85,26 @@ const ResultsPage = () => {
                 />
               ))}
             </div>
-          </section>
+          </div>
         )}
 
-        <section className="results-page__section">
-          <h2 className="results-page__section-title">Samenvatting</h2>
-          <p className="results-page__summary">
-            Je hebt {score} van de {totalQuestions} vragen goed beantwoord.
-          </p>
-        </section>
-
-        <div className="results-page__actions">
+        <div className="res-btns">
           <button
             type="button"
-            className="results-page__btn results-page__btn--primary"
+            className="res-btn-primary"
             onClick={() => navigate('/dashboard')}
           >
             Opnieuw spelen
           </button>
           <button
             type="button"
-            className="results-page__btn results-page__btn--secondary"
+            className="res-btn-outline"
             onClick={() => navigate('/leaderboard')}
           >
-            Leaderboard
-          </button>
-          <button
-            type="button"
-            className="results-page__btn results-page__btn--ghost"
-            onClick={() => navigate('/dashboard')}
-          >
-            Dashboard
+            Ranglijst bekijken
           </button>
         </div>
-      </main>
+      </div>
     </div>
   );
 };

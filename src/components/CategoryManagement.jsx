@@ -79,7 +79,7 @@ const CategoryManagement = () => {
   };
 
   return (
-    <div className="admin-tab-content">
+    <div className="admin-section">
       <form className="admin-form" onSubmit={handleCreate}>
         <Input
           id="new-category"

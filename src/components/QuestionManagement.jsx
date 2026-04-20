@@ -76,7 +76,7 @@ const QuestionManagement = () => {
   };
 
   return (
-    <div className="admin-tab-content">
+    <div className="admin-section">
       <form className="admin-form" onSubmit={handleCreate}>
         <div className="admin-form__field">
           <label className="admin-form__label" htmlFor="subcategory-id">
