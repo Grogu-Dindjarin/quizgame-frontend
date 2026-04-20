@@ -1,18 +1,21 @@
 .badge-card {
   display: flex;
   align-items: center;
-  gap: 0.9rem;
-  padding: 0.9rem 1rem;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  gap: 12px;
+  padding: 14px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .badge-card__icon {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background-color: #fff8e1;
+  background: rgba(124, 58, 237, 0.15);
+  border: 1px solid rgba(124, 58, 237, 0.25);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -33,16 +36,17 @@
 .badge-card__info {
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
+  gap: 3px;
 }
 
 .badge-card__name {
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: var(--color-text, #1a1a2e);
+  font-size: 0.875rem;
+  font-weight: 800;
+  color: var(--text);
 }
 
 .badge-card__description {
-  font-size: 0.8rem;
-  color: var(--color-text-muted, #888);
+  font-size: 0.75rem;
+  color: var(--text-2);
+  font-weight: 500;
 }
