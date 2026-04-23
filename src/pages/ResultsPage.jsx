@@ -30,6 +30,35 @@ const ExplosionIcon = ({ size = 56 }) => (
   </svg>
 );
 
+const ScoreRing = ({ percentage }) => {
+  const r = 108;
+  const circ = 2 * Math.PI * r;
+  const offset = circ * (1 - percentage / 100);
+  return (
+    <svg width="280" height="280" viewBox="0 0 280 280">
+      <defs>
+        <linearGradient id="ring-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#f9a8d4" />
+          <stop offset="100%" stopColor="#7c3aed" />
+        </linearGradient>
+      </defs>
+      <circle cx="140" cy="140" r={r} fill="none" stroke="rgba(255,255,255,0.07)" strokeWidth="14" />
+      <circle
+        cx="140"
+        cy="140"
+        r={r}
+        fill="none"
+        stroke="url(#ring-grad)"
+        strokeWidth="14"
+        strokeLinecap="round"
+        strokeDasharray={circ}
+        strokeDashoffset={offset}
+        transform="rotate(-90 140 140)"
+      />
+    </svg>
+  );
+};
+
 const ResultsPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -122,6 +151,20 @@ const ResultsPage = () => {
           <div className="res-stat-tile">
             <div className="res-stat-v res-stat-v--warn">+{score * 100}</div>
             <div className="res-stat-l">Punten</div>
+          </div>
+        </div>
+
+        <div className="res-desktop-hero">
+          <div className="res-ring-wrap">
+            <ScoreRing percentage={percentage} />
+            <div className="res-ring-inner">
+              <div className="res-ring-pct">{percentage}%</div>
+              <div className="res-ring-sub">gescoord</div>
+            </div>
+          </div>
+          <div className="res-grade">{getLabel(percentage)}</div>
+          <div className="res-grade-detail">
+            {score} van {totalQuestions} vragen goed
           </div>
         </div>
 

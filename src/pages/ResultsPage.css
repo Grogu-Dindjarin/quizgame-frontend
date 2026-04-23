@@ -214,6 +214,10 @@
   display: none;
 }
 
+.res-desktop-hero {
+  display: none;
+}
+
 @media (min-width: 768px) {
   .results-page {
     flex-direction: row;
@@ -368,6 +372,8 @@
   /* Main scroll area */
   .results-scroll {
     flex: 1;
+    display: flex;
+    flex-direction: column;
     padding-bottom: 48px;
   }
 
@@ -378,8 +384,67 @@
     display: none;
   }
 
-  /* Badges section gets top padding since hero is hidden */
+  /* Desktop score ring hero */
+  .res-desktop-hero {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 48px;
+    min-height: 400px;
+  }
+
+  .res-ring-wrap {
+    position: relative;
+    width: 280px;
+    height: 280px;
+    flex-shrink: 0;
+  }
+
+  .res-ring-inner {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  .res-ring-pct {
+    font-size: 3.5rem;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    background: linear-gradient(135deg, #fff 30%, #a78bfa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .res-ring-sub {
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-3);
+  }
+
+  .res-grade {
+    font-size: 1.75rem;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+  }
+
+  .res-grade-detail {
+    font-size: 0.9375rem;
+    color: var(--text-2);
+    font-weight: 600;
+  }
+
   .res-sec {
-    padding-top: 48px;
+    padding: 0 48px 24px;
   }
 }
