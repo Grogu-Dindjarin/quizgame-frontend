@@ -90,6 +90,18 @@ const NavBar = () => {
 
   return (
     <nav className="navbar">
+      <div className="navbar__brand">
+        <div className="navbar__brand-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M9 6C7.5 4.5 5 5 4.5 7S6 11 8 11.5" />
+            <path d="M15 6C16.5 4.5 19 5 19.5 7S18 11 16 11.5" />
+            <path d="M8 11.5C6.5 12.5 6 14 7 15.5S9.5 16.5 11 16" />
+            <path d="M16 11.5C17.5 12.5 18 14 17 15.5S14.5 16.5 13 16" />
+            <circle cx="12" cy="12" r="2.2" />
+          </svg>
+        </div>
+        <span className="navbar__brand-name">QuizGame</span>
+      </div>
       <NavLink to="/dashboard" className={({ isActive }) => `navbar__link${isActive ? ' navbar__link--active' : ''}`}>
         {({ isActive }) => (
           <>

@@ -114,3 +114,20 @@ ul,
 ol {
   list-style: none;
 }
+
+/* ── Desktop ── */
+@media (min-width: 768px) {
+  #root {
+    max-width: 100%;
+    margin: 0;
+  }
+
+  .dashboard,
+  .quiz-page,
+  .results-page,
+  .leaderboard-page,
+  .profile-page,
+  .admin-page {
+    margin-left: 220px;
+  }
+}
