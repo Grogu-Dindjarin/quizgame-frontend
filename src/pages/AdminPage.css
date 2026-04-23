@@ -328,3 +328,25 @@
 .admin-cancel-btn:hover {
   background: var(--surface-hi);
 }
+
+/* ── Desktop ── */
+@media (min-width: 768px) {
+  .adm-hd {
+    padding: 36px 48px 16px;
+  }
+
+  .adm-scroll {
+    padding: 0 48px 60px;
+  }
+
+  .admin-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 32px;
+    align-items: start;
+  }
+
+  .admin-section__heading {
+    grid-column: 1 / -1;
+  }
+}

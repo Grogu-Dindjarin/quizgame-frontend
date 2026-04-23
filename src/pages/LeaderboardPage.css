@@ -284,3 +284,38 @@
   color: var(--color-text-dim);
   font-size: 0.85rem;
 }
+
+/* ── Desktop ── */
+@media (min-width: 768px) {
+  .lb-scroll {
+    padding-bottom: 48px;
+  }
+
+  .lb-hero {
+    padding: 44px 0 20px;
+    max-width: 720px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .lb-title {
+    font-size: 2.25rem;
+  }
+
+  .podium {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0 0 28px;
+  }
+
+  .rank-list {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  .lb-state {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+}

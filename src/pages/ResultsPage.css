@@ -208,3 +208,52 @@
   border-color: rgba(255, 255, 255, 0.5);
   background: rgba(255, 255, 255, 0.05);
 }
+
+/* ── Desktop ── */
+@media (min-width: 768px) {
+  .results-scroll {
+    max-width: 720px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .res-hero {
+    padding: 56px 48px 28px;
+  }
+
+  .res-big {
+    font-size: 6rem;
+  }
+
+  .res-label {
+    font-size: 1.625rem;
+  }
+
+  .res-stats {
+    padding: 0 48px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  .res-stat-tile {
+    padding: 22px 16px;
+  }
+
+  .res-stat-v {
+    font-size: 1.75rem;
+  }
+
+  .res-sec {
+    padding: 22px 48px 0;
+  }
+
+  .res-btns {
+    padding: 20px 48px 48px;
+    flex-direction: row;
+  }
+
+  .res-btn-primary,
+  .res-btn-outline {
+    flex: 1;
+  }
+}
