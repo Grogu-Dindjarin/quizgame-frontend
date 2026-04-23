@@ -9,10 +9,10 @@ const getLabel = (pct) => {
   return 'Blijf oefenen!';
 };
 
-const ExplosionIcon = () => (
+const ExplosionIcon = ({ size = 56 }) => (
   <svg
-    width="56"
-    height="56"
+    width={size}
+    height={size}
     viewBox="0 0 24 24"
     fill="none"
     stroke="url(#res-grad)"
@@ -45,6 +45,59 @@ const ResultsPage = () => {
 
   return (
     <div className="results-page">
+      <aside className="res-sidebar">
+        <button
+          type="button"
+          className="rs-back"
+          onClick={() => navigate('/dashboard')}
+        >
+          ←
+        </button>
+
+        <div className="rs-hero">
+          <ExplosionIcon size={44} />
+          <div className="rs-score">
+            {score} / {totalQuestions}
+          </div>
+          <div className="rs-label">{getLabel(percentage)}</div>
+          <div className="rs-sub">{percentage}% gescoord</div>
+        </div>
+
+        <div className="rs-stats">
+          <div className="rs-stat">
+            <span className="rs-stat-v rs-stat-v--accent">{percentage}%</span>
+            <span className="rs-stat-l">Score</span>
+          </div>
+          <div className="rs-stat">
+            <span className="rs-stat-v">{score}/{totalQuestions}</span>
+            <span className="rs-stat-l">Correct</span>
+          </div>
+          <div className="rs-stat">
+            <span className="rs-stat-v rs-stat-v--warn">+{score * 100}</span>
+            <span className="rs-stat-l">Punten</span>
+          </div>
+        </div>
+
+        <div className="rs-spacer" />
+
+        <div className="rs-actions">
+          <button
+            type="button"
+            className="rs-btn-primary"
+            onClick={() => navigate('/dashboard')}
+          >
+            Opnieuw spelen
+          </button>
+          <button
+            type="button"
+            className="rs-btn-outline"
+            onClick={() => navigate('/leaderboard')}
+          >
+            Ranglijst
+          </button>
+        </div>
+      </aside>
+
       <div className="results-scroll">
         <div className="res-hero">
           <ExplosionIcon />

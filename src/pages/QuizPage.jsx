@@ -6,6 +6,9 @@ import './QuizPage.css';
 
 const ANSWER_LABELS = ['A', 'B', 'C', 'D'];
 
+const DIFF_LABEL = { BEGINNER: 'Beginner', INTERMEDIATE: 'Gemiddeld', EXPERT: 'Expert' };
+const DIFF_COLOR = { BEGINNER: 'green', INTERMEDIATE: 'warn', EXPERT: 'danger' };
+
 const HourglassIcon = () => (
   <svg
     width="26"
@@ -80,6 +83,50 @@ const QuizPage = () => {
 
   return (
     <div className="quiz-page">
+      <aside className="quiz-sidebar">
+        <button
+          type="button"
+          className="qs-back"
+          onClick={() => navigate('/dashboard')}
+        >
+          ←
+        </button>
+
+        <div className="qs-info">
+          <div className="qs-title">{currentQuestion.subcategoryName ?? 'Quiz'}</div>
+          <div className="qs-counter">
+            Vraag {currentIndex + 1} / {questions.length}
+          </div>
+        </div>
+
+        <div className="qs-prog">
+          <div className="qs-prog-track">
+            <div
+              className="qs-prog-fill"
+              style={{ width: `${progressPercent}%` }}
+            />
+          </div>
+        </div>
+
+        <div className="qs-timer">
+          <div className="qs-timer-label">Resterende tijd</div>
+          <div className="qs-timer-row">
+            <div
+              className={`qs-timer-num${timeLeft <= 3 ? ' qs-timer-num--urgent' : ''}`}
+            >
+              {timeLeft}
+            </div>
+            <HourglassIcon />
+          </div>
+        </div>
+
+        {difficulty && (
+          <div className={`qs-diff qs-diff--${DIFF_COLOR[difficulty] ?? 'green'}`}>
+            {DIFF_LABEL[difficulty] ?? difficulty}
+          </div>
+        )}
+      </aside>
+
       <div className="quiz-topbar">
         <div className="quiz-prog-track">
           <div
