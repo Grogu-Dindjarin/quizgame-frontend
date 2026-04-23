@@ -155,3 +155,59 @@
   text-align: center;
   margin: 0;
 }
+
+/* ── Desktop two-column ── */
+@media (min-width: 768px) {
+  .login-layout {
+    flex-direction: row;
+    padding: 0;
+    gap: 0;
+    overflow: hidden;
+  }
+
+  /* Form panel — left */
+  .login-card {
+    order: -1;
+    width: 460px;
+    flex-shrink: 0;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 0;
+    padding: 64px 56px;
+    border: none;
+    border-right: 1px solid rgba(255, 255, 255, 0.07);
+    background: rgba(11, 11, 21, 0.92);
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
+    gap: 20px;
+  }
+
+  /* Brand panel — right */
+  .login-brand {
+    flex: 1;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 80px 72px;
+    text-align: left;
+  }
+
+  .login-icon svg {
+    width: 68px;
+    height: 68px;
+  }
+
+  .login-brand h1 {
+    font-size: 3.75rem;
+    margin-top: 24px;
+    line-height: 1.08;
+  }
+
+  .login-brand p {
+    font-size: 1.0625rem;
+    margin-top: 16px;
+    max-width: 380px;
+    line-height: 1.65;
+  }
+}
