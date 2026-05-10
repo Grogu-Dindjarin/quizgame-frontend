@@ -20,7 +20,7 @@ const Avatar = ({ src, displayName, size = 64 }) => {
       style={style}
       aria-label={`Avatar van ${displayName}`}
     >
-      {displayName?.charAt(0).toUpperCase()}
+      {displayName?.split(' ').map(w => w.charAt(0)).join('').toUpperCase().slice(0, 2)}
     </div>
   );
 };

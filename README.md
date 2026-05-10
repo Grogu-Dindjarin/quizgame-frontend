@@ -66,7 +66,7 @@ src/
 
 ## Default accounts (seeded)
 
-| Email            | Password | Role  |
-| ---------------- | -------- | ----- |
-| admin@quizzle.nl | admin123 | ADMIN |
-| user@quizzle.nl  | user123  | USER  |
+| Email             | Password  | Role  |
+| ----------------- | --------- | ----- |
+| admin@quizzle.nl  | welkom123 | ADMIN |
+| speler@quizzle.nl | welkom123 | USER  |
