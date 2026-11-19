@@ -89,8 +89,11 @@ const ProfilePage = () => {
       setAvatarSrc(newSrc);
       updateAvatar(data.avatarPath);
       setMessage('Avatar succesvol bijgewerkt.');
-    } catch {
-      setError('Avatar uploaden mislukt. Probeer het opnieuw.');
+    } catch (err) {
+      setError(
+        err.response?.data?.error ??
+          'Avatar uploaden mislukt. Probeer het opnieuw.',
+      );
     } finally {
       setUploadingAvatar(false);
       e.target.value = '';
