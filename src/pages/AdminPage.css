@@ -350,3 +350,32 @@
     grid-column: 1 / -1;
   }
 }
+
+/* ── Question images ── */
+.admin-form__file {
+  color: var(--text-2);
+  font-size: 0.8125rem;
+}
+
+.admin-list__image {
+  width: 120px;
+  max-width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+
+.admin-list__upload {
+  padding: 5px 12px;
+  border-radius: 8px;
+  font-size: 0.6875rem;
+  font-weight: 800;
+  cursor: pointer;
+  background: rgba(124, 58, 237, 0.18);
+  color: #a78bfa;
+}
+
+.admin-list__upload:hover {
+  background: rgba(124, 58, 237, 0.28);
+}

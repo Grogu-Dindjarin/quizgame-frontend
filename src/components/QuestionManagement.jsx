@@ -5,6 +5,18 @@ import Input from './Input';
 import api from '../services/api';
 
 const ANSWER_KEYS = ['A', 'B', 'C', 'D'];
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8080';
+
+const uploadImage = async (questionId, file) => {
+  const formData = new FormData();
+  formData.append('file', file);
+  const { data } = await api.post(
+    `/api/questions/${questionId}/image`,
+    formData,
+    { headers: { 'Content-Type': 'multipart/form-data' } },
+  );
+  return data;
+};
 
 const QuestionManagement = () => {
   const [questions, setQuestions] = useState([]);
@@ -15,6 +27,8 @@ const QuestionManagement = () => {
   const [questionText, setQuestionText] = useState('');
   const [answers, setAnswers] = useState({ A: '', B: '', C: '', D: '' });
   const [correctKey, setCorrectKey] = useState('A');
+  const [imageFile, setImageFile] = useState(null);
+  const [fileInputKey, setFileInputKey] = useState(0);
   const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
@@ -54,15 +68,32 @@ const QuestionManagement = () => {
         });
       }
 
+      const createdQuestion = imageFile
+        ? await uploadImage(questionId, imageFile)
+        : questionResponse.data;
+
       setSubcategoryId('');
       setQuestionText('');
       setAnswers({ A: '', B: '', C: '', D: '' });
       setCorrectKey('A');
-      setQuestions((prev) => [...prev, questionResponse.data]);
-    } catch {
-      setError('Vraag aanmaken mislukt.');
+      setImageFile(null);
+      setFileInputKey((k) => k + 1);
+      setQuestions((prev) => [...prev, createdQuestion]);
+    } catch (err) {
+      setError(err.response?.data?.error ?? 'Vraag aanmaken mislukt.');
     } finally {
       setSubmitting(false);
+    }
+  };
+
+  const handleImageChange = async (id, file) => {
+    if (!file) return;
+    setError(null);
+    try {
+      const updated = await uploadImage(id, file);
+      setQuestions((prev) => prev.map((q) => (q.id === id ? updated : q)));
+    } catch (err) {
+      setError(err.response?.data?.error ?? 'Afbeelding uploaden mislukt.');
     }
   };
 
@@ -102,6 +133,20 @@ const QuestionManagement = () => {
           placeholder="Stel je vraag..."
           required
         />
+
+        <div className="admin-form__field">
+          <label className="admin-form__label" htmlFor="question-image">
+            Afbeelding (optioneel, max 1 MB)
+          </label>
+          <input
+            key={fileInputKey}
+            id="question-image"
+            className="admin-form__file"
+            type="file"
+            accept="image/*"
+            onChange={(e) => setImageFile(e.target.files[0] ?? null)}
+          />
+        </div>
 
         <div className="admin-answers">
           {ANSWER_KEYS.map((key) => (
@@ -143,8 +188,29 @@ const QuestionManagement = () => {
         <ul className="admin-list">
           {questions.map((question) => (
             <li key={question.id} className="admin-list__item">
+              {question.imagePath && (
+                <img
+                  className="admin-list__image"
+                  src={`${API_BASE}${question.imagePath}`}
+                  alt=""
+                />
+              )}
               <span className="admin-list__name">{question.text}</span>
               <div className="admin-list__actions">
+                <label className="admin-list__upload">
+                  {question.imagePath
+                    ? 'Afbeelding wijzigen'
+                    : 'Afbeelding toevoegen'}
+                  <input
+                    type="file"
+                    accept="image/*"
+                    hidden
+                    onChange={(e) => {
+                      handleImageChange(question.id, e.target.files[0]);
+                      e.target.value = '';
+                    }}
+                  />
+                </label>
                 <Button onClick={() => handleDelete(question.id)}>
                   Verwijderen
                 </Button>
