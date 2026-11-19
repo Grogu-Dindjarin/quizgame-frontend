@@ -5,6 +5,7 @@ import useQuiz from '../hooks/useQuiz';
 import './QuizPage.css';
 
 const ANSWER_LABELS = ['A', 'B', 'C', 'D'];
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8080';
 
 const DIFF_LABEL = { BEGINNER: 'Beginner', INTERMEDIATE: 'Gemiddeld', EXPERT: 'Expert' };
 const DIFF_COLOR = { BEGINNER: 'green', INTERMEDIATE: 'warn', EXPERT: 'danger' };
@@ -169,6 +170,13 @@ const QuizPage = () => {
           </div>
 
           <div className="quiz-q-card">
+            {currentQuestion.imagePath && (
+              <img
+                className="quiz-q-image"
+                src={`${API_BASE}${currentQuestion.imagePath}`}
+                alt="Afbeelding bij de vraag"
+              />
+            )}
             <p className="quiz-q-text">{currentQuestion.text}</p>
           </div>
 
