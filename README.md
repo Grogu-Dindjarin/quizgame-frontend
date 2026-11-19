@@ -2,44 +2,84 @@
 
 React frontend for the Quizzle quiz application, built with Vite and Bun.
 
+GitHub repository: https://github.com/Grogu-Dindjarin/quizgame-frontend
+
+## Table of contents
+
+1. [Introduction](#introduction)
+2. [Prerequisites](#prerequisites)
+3. [Project structure and technologies](#project-structure-and-technologies)
+4. [Getting started](#getting-started)
+5. [Available commands](#available-commands)
+6. [Default accounts and roles](#default-accounts-and-roles)
+
+## Introduction
+
+Quizzle is a quiz and flashcard application. This React application is the user interface; all data comes from the Spring Boot web API ([quizgame-backend](https://github.com/Grogu-Dindjarin/quizgame-backend)).
+
+Main features:
+
+- Register and log in (login state is kept in React Context)
+- Choose a category, subcategory and difficulty level and play a quiz
+- See your score and earned badges on the results page
+- View the leaderboard
+- Edit your profile and upload an avatar image
+- Admin page: manage categories, subcategories, questions and answers
+
 ## Prerequisites
 
 - [Bun](https://bun.sh) v1.0+
-- The backend must be running on `http://localhost:8080` (or configure `VITE_API_URL`)
+- The backend must be running on `http://localhost:8080` (see the backend README), or configure `VITE_API_URL`
+
+## Project structure and technologies
+
+```
+src/
+├── components/     # Reusable UI components
+├── context/        # React Context (AuthContext)
+├── hooks/          # Custom React hooks (useQuiz)
+├── pages/          # Page components (one per route)
+├── services/       # Axios instance (api.js) that adds the JWT to every request
+└── styles/         # Global CSS and variables
+```
+
+Technologies:
+
+- **React 18** — component-based user interface, with React Context for login state.
+- **Vite** — development server and build tool.
+- **Bun** — installs the dependencies and runs the scripts in `package.json`.
+- **React Router** — navigation between pages, with protected routes for logged-in users and admins.
+- **Axios** — HTTP requests to the backend.
+- **CSS (self-written, Flexbox)** — no styling framework.
+- **ESLint and Prettier** — code quality and formatting.
 
 ## Getting started
 
-Install dependencies:
+Run these commands in the project root (the folder with `package.json`).
 
-```bash
-bun install
-```
+1. Install dependencies:
 
-Copy the environment template and configure it:
+   ```bash
+   bun install
+   ```
 
-```bash
-cp .env.example .env
-```
+2. Create the environment file:
 
-Start the development server:
+   ```bash
+   cp .env.example .env
+   ```
 
-```bash
-bun run dev
-```
+   | Variable       | Default                 | Description                 |
+   | -------------- | ----------------------- | --------------------------- |
+   | `VITE_API_URL` | `http://localhost:8080` | Base URL of the backend API |
 
-Open [http://localhost:5173](http://localhost:5173) in your browser.
+3. Start the development server:
 
-## Environment variables
+   ```bash
+   bun run dev
+   ```
 
-| Variable       | Default                 | Description                 |
-| -------------- | ----------------------- | --------------------------- |
-| `VITE_API_URL` | `http://localhost:8080` | Base URL of the backend API |
-
-Create a `.env` file in the project root:
-
-```
-VITE_API_URL=http://localhost:8080
-```
+4. Open [http://localhost:5173](http://localhost:5173) in your browser.
 
 ## Available commands
 
@@ -52,21 +92,16 @@ VITE_API_URL=http://localhost:8080
 | `bun run format`  | Format code with Prettier                |
 | `bun run quality` | Format and lint in one command           |
 
-## Project structure
+The frontend has no automated tests; the tests of the web API are described in the backend README.
 
-```
-src/
-├── components/     # Reusable UI components
-├── context/        # React Context (AuthContext)
-├── hooks/          # Custom React hooks
-├── pages/          # Page components (one per route)
-├── services/       # Axios instance and API helpers
-└── styles/         # Global CSS and variables
-```
+## Default accounts and roles
 
-## Default accounts (seeded)
+These accounts are loaded by the backend (`data.sql`):
 
 | Email             | Password  | Role  |
 | ----------------- | --------- | ----- |
 | admin@quizzle.nl  | welkom123 | ADMIN |
 | speler@quizzle.nl | welkom123 | USER  |
+
+- **USER** — play quizzes, view results, badges and leaderboard, edit own profile and avatar.
+- **ADMIN** — everything a USER can do, plus the admin page.
