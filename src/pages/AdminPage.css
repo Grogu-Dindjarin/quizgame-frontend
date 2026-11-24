@@ -379,3 +379,9 @@
 .admin-list__upload:hover {
   background: rgba(124, 58, 237, 0.28);
 }
+
+/* ── Subcategory meta ── */
+.admin-list__meta {
+  font-size: 0.75rem;
+  color: var(--text-2);
+}
