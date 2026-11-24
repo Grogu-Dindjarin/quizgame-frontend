@@ -7,6 +7,13 @@ import api from '../services/api';
 const ANSWER_KEYS = ['A', 'B', 'C', 'D'];
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8080';
 
+const subcategoryOptions = (subcategories) =>
+  subcategories.map((subcategory) => (
+    <option key={subcategory.id} value={subcategory.id}>
+      {subcategory.categoryName} – {subcategory.name}
+    </option>
+  ));
+
 const uploadImage = async (questionId, file) => {
   const formData = new FormData();
   formData.append('file', file);
@@ -20,6 +27,7 @@ const uploadImage = async (questionId, file) => {
 
 const QuestionManagement = () => {
   const [questions, setQuestions] = useState([]);
+  const [subcategories, setSubcategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -31,11 +39,19 @@ const QuestionManagement = () => {
   const [fileInputKey, setFileInputKey] = useState(0);
   const [submitting, setSubmitting] = useState(false);
 
+  const [editingId, setEditingId] = useState(null);
+  const [editText, setEditText] = useState('');
+  const [editSubcategoryId, setEditSubcategoryId] = useState('');
+
   useEffect(() => {
-    const fetchQuestions = async () => {
+    const fetchData = async () => {
       try {
-        const response = await api.get('/api/questions');
-        setQuestions(response.data);
+        const [questionResponse, subcategoryResponse] = await Promise.all([
+          api.get('/api/questions'),
+          api.get('/api/subcategories'),
+        ]);
+        setQuestions(questionResponse.data);
+        setSubcategories(subcategoryResponse.data);
       } catch {
         setError('Vragen konden niet worden geladen.');
       } finally {
@@ -43,7 +59,7 @@ const QuestionManagement = () => {
       }
     };
 
-    fetchQuestions();
+    fetchData();
   }, []);
 
   const handleAnswerChange = (key, value) => {
@@ -79,6 +95,7 @@ const QuestionManagement = () => {
       setImageFile(null);
       setFileInputKey((k) => k + 1);
       setQuestions((prev) => [...prev, createdQuestion]);
+      setError(null);
     } catch (err) {
       setError(err.response?.data?.error ?? 'Vraag aanmaken mislukt.');
     } finally {
@@ -97,6 +114,29 @@ const QuestionManagement = () => {
     }
   };
 
+  const startEdit = (question) => {
+    setEditingId(question.id);
+    setEditText(question.text);
+    setEditSubcategoryId(String(question.subcategoryId));
+  };
+
+  const handleEditSubmit = async (e, question) => {
+    e.preventDefault();
+    if (!editText.trim() || !editSubcategoryId) return;
+    try {
+      const { data } = await api.put(`/api/questions/${question.id}`, {
+        text: editText.trim(),
+        subcategoryId: Number(editSubcategoryId),
+        imagePath: question.imagePath,
+      });
+      setQuestions((prev) => prev.map((q) => (q.id === data.id ? data : q)));
+      setEditingId(null);
+      setError(null);
+    } catch (err) {
+      setError(err.response?.data?.error ?? 'Bewerken mislukt.');
+    }
+  };
+
   const handleDelete = async (id) => {
     try {
       await api.delete(`/api/questions/${id}`);
@@ -111,18 +151,18 @@ const QuestionManagement = () => {
       <form className="admin-form" onSubmit={handleCreate}>
         <div className="admin-form__field">
           <label className="admin-form__label" htmlFor="subcategory-id">
-            Subcategorie ID
+            Subcategorie
           </label>
-          <input
+          <select
             id="subcategory-id"
             className="admin-form__input"
-            type="number"
             value={subcategoryId}
             onChange={(e) => setSubcategoryId(e.target.value)}
-            placeholder="bijv. 3"
             required
-            min={1}
-          />
+          >
+            <option value="">Kies een subcategorie</option>
+            {subcategoryOptions(subcategories)}
+          </select>
         </div>
 
         <Input
@@ -179,12 +219,13 @@ const QuestionManagement = () => {
         <Button type="submit" disabled={submitting}>
           {submitting ? 'Opslaan...' : 'Vraag toevoegen'}
         </Button>
+
+        {error && <p className="admin-status admin-status--error">{error}</p>}
       </form>
 
       {loading && <p className="admin-status">Laden...</p>}
-      {error && <p className="admin-status admin-status--error">{error}</p>}
 
-      {!loading && !error && (
+      {!loading && (
         <ul className="admin-list">
           {questions.map((question) => (
             <li key={question.id} className="admin-list__item">
@@ -211,10 +252,48 @@ const QuestionManagement = () => {
                     }}
                   />
                 </label>
+                <Button onClick={() => startEdit(question)}>Bewerken</Button>
                 <Button onClick={() => handleDelete(question.id)}>
                   Verwijderen
                 </Button>
               </div>
+              {editingId === question.id && (
+                <form
+                  className="admin-inline-form"
+                  onSubmit={(e) => handleEditSubmit(e, question)}
+                >
+                  <Input
+                    id={`edit-question-${question.id}`}
+                    label="Vraagtekst wijzigen"
+                    value={editText}
+                    onChange={(e) => setEditText(e.target.value)}
+                    required
+                  />
+                  <div className="admin-form__field">
+                    <label
+                      className="admin-form__label"
+                      htmlFor={`edit-question-subcategory-${question.id}`}
+                    >
+                      Subcategorie
+                    </label>
+                    <select
+                      id={`edit-question-subcategory-${question.id}`}
+                      className="admin-form__input"
+                      value={editSubcategoryId}
+                      onChange={(e) => setEditSubcategoryId(e.target.value)}
+                      required
+                    >
+                      {subcategoryOptions(subcategories)}
+                    </select>
+                  </div>
+                  <div className="admin-inline-form__actions">
+                    <Button type="submit">Opslaan</Button>
+                    <Button onClick={() => setEditingId(null)}>
+                      Annuleren
+                    </Button>
+                  </div>
+                </form>
+              )}
             </li>
           ))}
         </ul>
