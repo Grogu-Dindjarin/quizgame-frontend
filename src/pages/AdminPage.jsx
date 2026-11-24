@@ -2,9 +2,10 @@ import { useState } from 'react';
 
 import CategoryManagement from '../components/CategoryManagement';
 import QuestionManagement from '../components/QuestionManagement';
+import SubcategoryManagement from '../components/SubcategoryManagement';
 import './AdminPage.css';
 
-const TABS = ['Categorieën', 'Vragen'];
+const TABS = ['Categorieën', 'Subcategorieën', 'Vragen'];
 
 const AdminPage = () => {
   const [activeTab, setActiveTab] = useState(TABS[0]);
@@ -29,6 +30,7 @@ const AdminPage = () => {
 
       <div className="adm-scroll">
         {activeTab === 'Categorieën' && <CategoryManagement />}
+        {activeTab === 'Subcategorieën' && <SubcategoryManagement />}
         {activeTab === 'Vragen' && <QuestionManagement />}
       </div>
     </div>
