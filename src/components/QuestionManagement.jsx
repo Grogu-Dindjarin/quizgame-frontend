@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+import AnswerManagement from './AnswerManagement';
 import Button from './Button';
 import Input from './Input';
 import api from '../services/api';
@@ -293,6 +294,9 @@ const QuestionManagement = () => {
                     </Button>
                   </div>
                 </form>
+              )}
+              {editingId === question.id && (
+                <AnswerManagement questionId={question.id} />
               )}
             </li>
           ))}
